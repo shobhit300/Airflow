@@ -7,11 +7,8 @@ from airflow.models import Variable
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.operators.subdag_operator import SubDagOperator
-from aro_nice_bd_preprocessing import sub_dag
-from aro_nice_bd_full_refresh import sub_dag2
-from aro_nice_bd_provider_contract import sub_dag3
-from aro_nice_bd_claim_inc_ld import sub_dag4
-from aro_nice_bd_postprocessing import sub_dag5
+from bd_preprocessing import sub_dag
+from full_refresh import sub_dag2
 from datetime import date
 from datetime import time
 from airflow.contrib.operators.spark_submit_operator import SparkSubmitOperator
@@ -58,7 +55,7 @@ today = str(today)
 task_completion_email = EmailOperator(
      			 task_id='Load_completion_email_notify',
                       to= ['shobhit300l@gmail.com'],
-                      subject='Nice BD Monthly Load Complete',
+                      subject='Monthly Load Complete',
                       html_content="Monthly Load is completed today : " + "" + today,
                       dag=main_dag)
 
